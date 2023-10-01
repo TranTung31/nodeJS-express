@@ -9,13 +9,17 @@ const port = 3000;
 app.use(morgan("combined"));
 
 // Templace engine
-app.engine("hbs", engine({
-  extname: 'hbs'
-}));
+app.engine(
+  "hbs",
+  engine({
+    extname: "hbs",
+  })
+);
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/views"));
 
-console.log("path: ", __dirname);
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.render("home");
